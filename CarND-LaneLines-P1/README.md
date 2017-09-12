@@ -19,7 +19,7 @@
 - builds two straight lane lines based on above calculated info
 - draws constructed lines
 
-### 2. Potential shortcomings
+## 2. Potential shortcomings
 One of potential shortcomings would happen when there will be many 'noises' and obstacles on image or video stream. 
 Kinds of possible noises/obstacles are: shadows, glares, another cars intersecting lane lines, pedestrians, etc
 Some redundant incorrectly detected lines can be token into account calculating average lane lines and increase algorithm error.
@@ -28,7 +28,7 @@ Yet another shortcoming is that road markup could be blurred, unclear or drawn w
 
 Another shortcoming could be lane detection on abrupt turns when lane lines can be out of predefined vertices on image and as well have unusual slopes. This trouble could raise on intersections or during active car maneuvering.
 
-### 3. Possible improvements to pipeline
+## 3. Possible improvements to pipeline
 
 A possible improvement would be to add more advanced image preprocessing: removing noises, glares and shadows from source image, obstacles detection and removing  from source image. This will reduce redundant 'noise' lines count and improve detection accuracy.
 
