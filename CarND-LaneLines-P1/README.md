@@ -30,9 +30,9 @@ Another shortcoming could be lane detection on abrupt turns when lane lines can 
 
 ### 3. Possible improvements to pipeline
 
-A possible improvement would be to add more advanced image preprocessing: removing noises, glares and shadows from source image, detection and removing obstacles from source image. This will reduce redundant 'noise' lines count and improve detection accuracy.
+A possible improvement would be to add more advanced image preprocessing: removing noises, glares and shadows from source image, obstacles detection and removing  from source image. This will reduce redundant 'noise' lines count and improve detection accuracy.
 
-One more possible improvement could be dynamic vertices, margin slopes and other param change depending on car maneuvering. For example when car turns. This requires to know info about earlier state images to detect maneuvering type and adjust param values.
+One more possible improvement could be dynamic vertices, margin allowed slopes and other params adjustment depending on car maneuvering. For example when car turns. This requires to know info about earlier state images to detect maneuvering type and adjust param values.
 
 Also one more improvement based on having previous states images will be possibility to filter out outliers. Algorithm will be able to calculate probability of each lane slope value based on previous images and use most likely one.
 
