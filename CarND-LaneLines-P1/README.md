@@ -19,7 +19,7 @@
 - builds two straight lane lines based on above calculated info
 - draws constructed lines
 
-### 2. Possible improvements of pipeline
+### 2. Potential shortcomings
 One of potential shortcomings would happen when there will be many 'noises' and obstacles on image or video stream. 
 Kinds of possible noises/obstacles are: shadows, glares, another cars intersecting lane lines, pedestrians, etc
 Some redundant incorrectly detected lines can be token into account calculating average lane lines and increase algorithm error.
