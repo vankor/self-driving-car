@@ -28,7 +28,7 @@ Yet another shortcoming is that road markup could be blurred, unclear or drawn w
 
 Another shortcoming could be lane detection on abrupt turns when lane lines can be out of predefined vertices on image and as well have unusual slopes. This trouble could raise on intersections or during active car maneuvering.
 
-### 3. Suggest possible improvements to your pipeline
+### 3. Possible improvements to pipeline
 
 A possible improvement would be to add more advanced image preprocessing: removing noises, glares and shadows from source image, detection and removing obstacles from source image. This will reduce redundant 'noise' lines count and improve detection accuracy.
 
