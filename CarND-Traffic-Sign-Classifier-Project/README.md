@@ -153,8 +153,8 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Children Corssing      		| Stop sign   									| 
-| Right-of-way at the next intersection     			| U-turn 										|
+| Children Corssing      		| Children Corssing   									| 
+| Right-of-way at the next intersection     			| Right-of-way at the next intersection 										|
 | No passing					| No passing											|
 | Roundabout mandatory	      		| Roundabout mandatory					 				|
 | No entry			| No entry      							|
