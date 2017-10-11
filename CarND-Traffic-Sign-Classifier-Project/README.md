@@ -112,7 +112,7 @@ Batch 64 was choosen (128 and 64 was tested).
 Number of epochs is 25.
 Dropout keep_probability is 0.75.
 
-#### 4. Describe the approach taken for finding a solution and getting the validation set accuracy to be at least 0.93. Include in the discussion the results on the training, validation and test sets and where in the code these were calculated. Your approach may have been an iterative process, in which case, outline the steps you took to get to the final solution and why you chose those steps. Perhaps your solution involved an already well known implementation or architecture. In this case, discuss why you think the architecture is suitable for the current problem.
+#### 4. Finding a solution and getting the validation set accuracy to be at least 0.93. 
 
 My final model results were:
 * training set accuracy of 99,7%
@@ -135,6 +135,7 @@ Also the number of fully connected neurons was increased. The number of epochs w
 #### 1. German traffic signs found on the web with the report.
 
 Here are ten German traffic signs that I found on the web:
+
 <img src="test_examples_web/im1.jpg" width = "100px" style="width: 100px;"/>
 <img src="test_examples_web/im2.jpg" width = "100px" style="width: 100px;"/>
 <img src="test_examples_web/im3.jpg" width = "100px" style="width: 100px;"/>
@@ -146,7 +147,10 @@ Here are ten German traffic signs that I found on the web:
 <img src="test_examples_web/im10.jpg" width = "100px" style="width: 100px;"/>
 <img src="test_examples_web/im11.jpg" width = "100px" style="width: 100px;"/>
 
-The first image might be difficult to classify because ...
+The images 8 and 10 are most difficult image because there is snow on the traffic sign surface and it is a big challenge to the model (such examples were missing in training set).
+The first image might be difficult to classify because the sign style a bit differs from training examples for it's.
+Images 1,2,3 have wattermarks, will see if it is problem for model
+The images 4,5,7 have complex background behind traffic signs
 
 #### 2. Discussing the model's predictions on these new traffic signs 
 
@@ -175,8 +179,8 @@ But this is quite specific case and we just have to enhance training set for suc
 
 Lets show TOP 5 classes probabilities for random traffic signs images:
 
-![alt text][image13]
 ![alt text][image14]
+![alt text][image15]
 
 As we can see above the model is quite certain of its predictions. In most cases the single class takes totally leadership. There was some uncertainity for case 1 and case 4. 
 - Traffic sign in case 4 (Roundabout mandatory) realy has some patterns of "Turn left ahead" sign (left arrow). 
