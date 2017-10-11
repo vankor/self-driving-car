@@ -135,16 +135,16 @@ Also the number of fully connected neurons was increased. The number of epochs w
 #### 1. German traffic signs found on the web with the report.
 
 Here are ten German traffic signs that I found on the web:
-<img src="test_examples_web/im1.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im2.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im3.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im4.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im6.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im7.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im8.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im9.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im10.jpg" style="width: 100px;"/>
-<img src="test_examples_web/im11.jpg" style="width: 100px;"/>
+<img src="test_examples_web/im1.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im2.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im3.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im4.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im6.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im7.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im8.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im9.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im10.jpg" width = "100px" style="width: 100px;"/>
+<img src="test_examples_web/im11.jpg" width = "100px" style="width: 100px;"/>
 
 The first image might be difficult to classify because ...
 
