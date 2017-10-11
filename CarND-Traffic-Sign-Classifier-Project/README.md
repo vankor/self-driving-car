@@ -27,6 +27,8 @@ The goals / steps of this project are the following:
 
 [image14]: examples/softmax_bars.png "Softmax 1"
 [image15]: examples/softmax_2.png "Softmax 2"
+[image16]: examples/web_images.png "Web Images"
+[image17]: examples/web_images_pred.png "Web Images Predictions"
 
 ## Rubric Points
 
@@ -136,16 +138,7 @@ Also the number of fully connected neurons was increased. The number of epochs w
 
 Here are ten German traffic signs that I found on the web:
 
-<img src="test_examples_web/im1.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im2.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im3.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im4.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im6.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im7.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im8.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im9.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im10.jpg" width = "100px" style="width: 100px;"/>
-<img src="test_examples_web/im11.jpg" width = "100px" style="width: 100px;"/>
+![alt text][image16]
 
 The images 8 and 10 are most difficult image because there is snow on the traffic sign surface and it is a big challenge to the model (such examples were missing in training set).
 The first image might be difficult to classify because the sign style a bit differs from training examples for it's.
@@ -155,6 +148,8 @@ The images 4,5,7 have complex background behind traffic signs
 #### 2. Discussing the model's predictions on these new traffic signs 
 
 Here are the results of the prediction:
+
+![alt text][image17]
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
@@ -185,6 +180,7 @@ Lets show TOP 5 classes probabilities for random traffic signs images:
 As we can see above the model is quite certain of its predictions. In most cases the single class takes totally leadership. There was some uncertainity for case 1 and case 4. 
 - Traffic sign in case 4 (Roundabout mandatory) realy has some patterns of "Turn left ahead" sign (left arrow). 
 - Also, traffic sign in case 1 (Children crossing) realy has some elements of "Slippery road" sign (childrens shapes are quite similar to two paralel zigzag lines :)).
+- In case 8 model is confused with snow on the traffic sign and missed, it has classified a sign like something between "Double curve" and "Slippery road"
 
 
 
