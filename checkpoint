@@ -1,0 +1,2 @@
+model_checkpoint_path: "more_filters_and_neurons_model_3.ckpt"
+all_model_checkpoint_paths: "more_filters_and_neurons_model_3.ckpt"
