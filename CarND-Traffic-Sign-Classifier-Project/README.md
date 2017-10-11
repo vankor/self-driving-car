@@ -135,7 +135,7 @@ Also the number of fully connected neurons was increased. The number of epochs w
 #### 1. German traffic signs found on the web with the report.
 
 Here are ten German traffic signs that I found on the web:
-
+<img src="test_examples_web/im1.jpg" style="width: 150px;"/>
 ![alt text](image4 =150x140) ![alt text][image5 =150x140] ![alt text][image6 =150x140] 
 ![alt text][image7 =150x140] ![alt text][image8 =150x140] ![alt text][image9 =150x140]
 ![alt text][image10 =150x140] ![alt text][image11 =150x140] ![alt text][image12 =150x140]
