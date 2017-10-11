@@ -14,16 +14,19 @@ The goals / steps of this project are the following:
 [image1]: examples/sign_distribution.png "Visualization"
 [image2]: examples/generated_images.png "Generated images"
 [image3]: examples/before_and_after_processing.png "Before and after"
-[image4]: examples/im1.jpg "Traffic Sign 1"
-[image5]: examples/im2 "Traffic Sign 2"
-[image6]: examples/im3 "Traffic Sign 3"
-[image7]: examples/im4 "Traffic Sign 4"
-[image8]: examples/im6 "Traffic Sign 5"
-[image9]: examples/im7.jpg "Traffic Sign 6"
-[image10]: examples/im8.jpg "Traffic Sign 7"
-[image11]: examples/im9.jpg "Traffic Sign 8"
-[image12]: examples/im10.jpg "Traffic Sign 9"
-[image13]: examples/im11.jpg "Traffic Sign 10"
+[image4]: test_examples_web/im1.jpg "Traffic Sign 1"
+[image5]: test_examples_web/im2 "Traffic Sign 2"
+[image6]: test_examples_web/im3 "Traffic Sign 3"
+[image7]: test_examples_web/im4 "Traffic Sign 4"
+[image8]: test_examples_web/im6 "Traffic Sign 5"
+[image9]: test_examples_web/im7.jpg "Traffic Sign 6"
+[image10]: test_examples_web/im8.jpg "Traffic Sign 7"
+[image11]: test_examples_web/im9.jpg "Traffic Sign 8"
+[image12]: test_examples_web/im10.jpg "Traffic Sign 9"
+[image13]: test_examples_web/im11.jpg "Traffic Sign 10"
+
+[image14]: examples/softmax_bars.png "Softmax 1"
+[image15]: examples/softmax_2.png "Softmax 2"
 
 ## Rubric Points
 
@@ -34,7 +37,7 @@ The goals / steps of this project are the following:
 The numpy library was being used to calculate summary statistics of the traffic
 signs data set:
 
-* The initial size of training set is 34799 (after generating new images with random distortions - 139196)
+* The initial size of training set is 34799 (after generating new images with random transformations - 139196)
 * The size of the validation set is 4410
 * The size of test set is 12630
 * The shape of a traffic sign image is 32X32
@@ -124,10 +127,8 @@ Iterative approach was chosen:
 Dropout is being used for avoid overfitting. Number of epochs 20 allowed model obtain higher accuracy. 
 Test accuracy has increased to 96.37%, validation 97,4%, train 99,5%
 * In final model was decided to use 2 conv layers but more convolutional filters to generate more features and depth. 
-Also the number of fully connected neurons was increased. The number of epochs was increased to 25. These changes
-* The most useful model changes were adding more convolutional filters (generating more features and depth), adding more fully connected neurons, 
-using dropout for avoiding overfitting and making weights more autonomous (decreasing weights crossdependency on each other), adding more epochs
-
+Also the number of fully connected neurons was increased. The number of epochs was increased to 25. These changes have allowed to obtain 99,7 training accuracy, 98,5% validation accuracy, 97,73% test accuracy
+* The most useful model changes were adding more convolutional filters (generating more features and depth), adding more fully connected neurons, using dropout for avoiding overfitting and making weights more autonomous (decreasing weights crossdependency on each other), adding more epochs
 
 ### Test a Model on New Images
 
@@ -148,35 +149,33 @@ Here are the results of the prediction:
 
 | Image			        |     Prediction	        					| 
 |:---------------------:|:---------------------------------------------:| 
-| Stop Sign      		| Stop sign   									| 
-| U-turn     			| U-turn 										|
-| Yield					| Yield											|
-| 100 km/h	      		| Bumpy Road					 				|
-| Slippery Road			| Slippery Road      							|
+| Children Corssing      		| Stop sign   									| 
+| Right-of-way at the next intersection     			| U-turn 										|
+| No passing					| No passing											|
+| Roundabout mandatory	      		| Roundabout mandatory					 				|
+| No entry			| No entry      							|
+| Wild animals crossing      		| Wild animals crossing   									| 
+| Keep right     			| Keep right 										|
+| Beware of ice/snow					| Slippery road											|
+| Road work	      		| Road work					 				|
+| Beware of ice/snow			| Beware of ice/snow      							|
 
-
-We have obtained quite good accuracy for unknown test images set (90%). 9 of 10 images were classified correctly. 
-But accuracy for random images is less than test set accuracy (97,76%). 
+We have obtained quite good accuracy for unknown test images set (90%). 
+9 of 10 images were classified correctly. 
+Accuracy for new web images is a bit less than test set accuracy (97,76%). 
 There is one missclasification for trafic sign covered by snow. 
-But this is quite specific case and we have to enhance training set for such specific cases (add more complex examples). 
+But this is quite specific case and we just have to enhance training set for such specific cases (add more complex examples). 
 
-#### 3. Describe how certain the model is when predicting on each of the five new images by looking at the softmax probabilities for each prediction. Provide the top 5 softmax probabilities for each image along with the sign type of each probability. (OPTIONAL: as described in the "Stand Out Suggestions" part of the rubric, visualizations can also be provided such as bar charts)
+#### 3. How certain the model is when predicting on each of the five new images (TOP 5 softmax propabilities)
 
-The code for making predictions on my final model is located in the 11th cell of the Ipython notebook.
+Lets show TOP 5 classes probabilities for random traffic signs images:
 
-For the first image, the model is relatively sure that this is a stop sign (probability of 0.6), and the image does contain a stop sign. The top five soft max probabilities were
+![alt text][image13]
+![alt text][image14]
 
-| Probability         	|     Prediction	        					| 
-|:---------------------:|:---------------------------------------------:| 
-| .60         			| Stop sign   									| 
-| .20     				| U-turn 										|
-| .05					| Yield											|
-| .04	      			| Bumpy Road					 				|
-| .01				    | Slippery Road      							|
-
-
-For the second image ... 
-
+As we can see above the model is quite certain of its predictions. In most cases the single class takes totally leadership. There was some uncertainity for case 1 and case 4. 
+- Traffic sign in case 4 (Roundabout mandatory) realy has some patterns of "Turn left ahead" sign (left arrow). 
+- Also, traffic sign in case 1 (Children crossing) realy has some elements of "Slippery road" sign (childrens shapes are quite similar to two paralel zigzag lines :)).
 
 
 
