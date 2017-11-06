@@ -8,11 +8,11 @@ The goal of this project is to build deep neural network to predict steering ang
 Simulator was being used for collecting training data from 3 cameras. 
 
 ## Files and Usage
-`model.py` : training codes.
-`image_augmentation.py` : code related to image preprocessing
-`driver_model`: trained model
-`drive.py`: code that runs driving simulation
-`video.mp4`: video on test track
+- `model.py` : training codes.
+- `image_augmentation.py` : code related to image preprocessing
+- `driver_model`: trained model
+- `drive.py`: code that runs driving simulation
+- `video.mp4`: video on test track
 How to use:
 - open Udacity simulator and select track (autonomous)
 - in cmd execute "python drive.py driver_model"
@@ -32,6 +32,7 @@ Following data augmentation techniques are applied in current project:
 2. Random flipping: With 50% probability each image is flipped horizontally.
 3. Random warping: each image is warped randomly (shifted horizontally) and steering angle is adjusted respectively to shift value. In such way training set becomes more general and includes more possible turns and angles.
 4. Each image is preprocessesd - cropped (only region of interest is being used for learning) and resized to 200 X 66 size for being competible with NVidia convnet architecture.
+
 Below is example of augmented images:
 
 ![alt text][image1]
