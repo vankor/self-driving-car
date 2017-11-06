@@ -3,7 +3,7 @@
 
 [image1]: images/augmentation_examples.png "Augmentation"
 
-# Behavioral Cloning for Self Driving Car
+# Self driving car - Behavioral Cloning
 The goal of this project is to build deep neural network to predict steering angle of car on track in udacity simulator.
 Simulator was being used for collecting training data from 3 cameras. 
 
