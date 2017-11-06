@@ -70,4 +70,7 @@ Trained model is saved in 'driver_model' file. Final model has loss about 0.015 
 
 To run test: `python drive.py driver_model`
 
+In `video.mp4` are demonstrated 3 demo laps of current model.
+
+
 
