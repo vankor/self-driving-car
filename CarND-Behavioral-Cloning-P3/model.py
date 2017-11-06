@@ -85,6 +85,7 @@ def generator(samples, batch_size=32 , isTrain = True):
 
 
 
+#fetch training data from csv file
 lines = []
 with open("./"+samples_folder+"/driving_log.csv") as csvfile:
     reader = csv.reader(csvfile)
@@ -92,18 +93,24 @@ with open("./"+samples_folder+"/driving_log.csv") as csvfile:
     for line in reader:
         lines.append(line)
 
-
+#show augmentation results
 showRandomImages(lines)
 
+#split training and test examples
 train_samples, validation_samples = train_test_split(lines, test_size=0.2)
+
+
+#setting up generators
 
 batch_size = 64
 epochs = 3
 
+
 train_generator = generator(train_samples, batch_size=batch_size)
 validation_generator = generator(validation_samples, batch_size=batch_size, isTrain=False)
 
-#shape = (160, 320, 3)
+
+#setting up Nvidia model with dropouts
 shape = (66, 200, 3)
 model = Sequential([
     Lambda(lambda x: (x / 255.0) - 0.5, input_shape=shape),
@@ -122,6 +129,7 @@ model = Sequential([
     Dense(1)
 ])
 
+#compile and fit model
 model.compile(optimizer='adam', loss='mse')
 
 history_object = model.fit_generator(train_generator, samples_per_epoch = len(train_samples), validation_data =
