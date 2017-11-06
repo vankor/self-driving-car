@@ -13,6 +13,7 @@ Simulator was being used for collecting training data from 3 cameras.
 - `driver_model`: trained model
 - `drive.py`: code that runs driving simulation
 - `video.mp4`: video on test track
+
 How to use:
 - open Udacity simulator and select track (autonomous)
 - in cmd execute "python drive.py driver_model"
