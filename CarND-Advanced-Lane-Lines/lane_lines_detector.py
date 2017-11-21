@@ -1,19 +1,19 @@
 
 # coding: utf-8
 
-# In[1]:
+# In[2]:
 
 
 import cv2
 import glob
 import pickle
 import numpy as np
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as pltBuild
 import matplotlib.image as mpimg
 from math import *
 
 
-# In[33]:
+# In[3]:
 
 
 def abs_sobel_thresh(img, orient='x', sobel_kernel=3, thresh=(0, 255)):
@@ -112,10 +112,6 @@ def combine_thresholds(img,s_thresh = (200, 255), l_thresh = (200, 255),
 
     return combined_binary
 
-def calibrate_and_undistort(img, objpoints, imgpoints, nx, ny):
-    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img.shape[1::-1], None, None)
-    return cv2.undistort(img, mtx, dist, None, mtx)
-
 def build_transformation_matricies(img):
     img_size = img.shape    
     src = np.array([[585. /1280.*img_size[1], 455./720.*img_size[0]],
@@ -135,9 +131,10 @@ def build_transformation_matricies(img):
 
 
 
-# In[3]:
+# In[5]:
 
 
+# Find chesboard corners
 objpoints = [] # 3d points in real world space
 imgpoints = [] # 2d points in image plane.
 
@@ -150,7 +147,6 @@ objp = np.zeros((ny*nx,3), np.float32)
 objp[:,:2] = np.mgrid[0:nx, 0:ny].T.reshape(-1,2)
 
 plt.figure(figsize=(12, 18)) #Figure for calibration images
-plt.figtext(0.5,0.9,'Image with corners patterns drawn', fontsize=22, ha='center')
 counter = 0
 for idx, fname in enumerate(images):
     img = cv2.imread(fname)
@@ -179,13 +175,13 @@ plt.show()
 ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img.shape[1::-1], None, None)
 
 def undistort_image(img):
-    ret, mtx, dist, rvecs, tvecs = cv2.calibrateCamera(objpoints, imgpoints, img.shape[1::-1], None, None)
     return cv2.undistort(img, mtx, dist, None, mtx)
 
 
 # In[5]:
 
 
+#Undistort testmimage and validate with chess board image
 test_image = cv2.imread('./camera_cal/calibration1.jpg')
 print("Before undistortion and calibration:")
 plt.imshow(test_image.squeeze(), cmap="gray")
@@ -212,16 +208,6 @@ plt.show()
 # In[6]:
 
 
-def blur_image(img):
-    gb = cv2.GaussianBlur(img, (5,5), 20.0)
-    return cv2.addWeighted(img, 2, gb, -1, 0)
-
-def image_transformation_pipeline(img, M):
-    undist = undistort_image(img)
-    warped = cv2.warpPerspective(undist, M, (img.shape[1], img.shape[0]))
-    #warped = blur_image(warped)
-    return warped
-
 def image_preprocessing_pipeline(img, M, warping_first = False):
     img = undistort_image(img)
     #img = blur_image(img)
@@ -237,6 +223,7 @@ def image_preprocessing_pipeline(img, M, warping_first = False):
 # In[34]:
 
 
+#Test color transformations and thresholds
 real_image = cv2.imread('test_images/test1.jpg')
 print("Test image before processing:")
 real_image = cv2.cvtColor(real_image, cv2.COLOR_BGR2RGB)
@@ -265,6 +252,7 @@ plt.show()
 # In[8]:
 
 
+#Build histogram of pixels frequency
 histogram = np.sum(binary_warped[binary_warped.shape[0]//2:,:], axis=0)
 plt.plot(histogram)
 plt.show()
@@ -273,24 +261,24 @@ plt.show()
 # In[10]:
 
 
+#Make color transform for test images
 import imageio
 images = glob.glob('./test_images/*.jpg')
                                           
-# Set up plot
-fig, axs = plt.subplots(len(images),2, figsize=(10, 20))
+fig, pl = plt.subplots(len(images),2, figsize=(10, 20))
 fig.subplots_adjust(hspace = .2, wspace=.001)
-axs = axs.ravel()
+pl = pl.ravel()
                   
 i = 0
 for image in images:
     img = cv2.imread(image)
     img = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
     img_bin = image_preprocessing_pipeline(img, M, warping_first = True)       
-    axs[i].imshow(img)
-    axs[i].axis('off')
+    pl[i].imshow(img)
+    pl[i].axis('off')
     i += 1
-    axs[i].imshow(img_bin, cmap='gray')
-    axs[i].axis('off')
+    pl[i].imshow(img_bin, cmap='gray')
+    pl[i].axis('off')
     i += 1
     
 print('...')
@@ -369,9 +357,6 @@ def build_lines_from_scratch(binary_warped, display = False):
     lefty = nonzeroy[left_lane_inds] 
     rightx = nonzerox[right_lane_inds]
     righty = nonzeroy[right_lane_inds] 
-    
-    #leftx, lefty = reject_outliers(leftx, lefty)
-    #rightx, righty = reject_outliers(rightx, righty)
 
     # Fit a second order polynomial to each
     left_fit = np.polyfit(lefty, leftx, 2)
@@ -411,9 +396,6 @@ def build_lines_from_prev_points(binary_warped, left_fit, right_fit, display = F
     lefty = nonzeroy[left_lane_inds] 
     rightx = nonzerox[right_lane_inds]
     righty = nonzeroy[right_lane_inds]
-    
-    #leftx, lefty = reject_outliers(leftx, lefty)
-    #rightx, righty = reject_outliers(rightx, righty)
     
     # Fit a second order polynomial to each
     left_fit = np.polyfit(lefty, leftx, 2)
@@ -460,6 +442,7 @@ def calculate_distance_from_center(img, left_fit, right_fit, xm_per_pix):
     center_dist = 0
     if left_fit is not None and right_fit is not None:
         car_position = image_center
+        #Find distance between car position and middle of left and right x_intercept
         left_fit_x_intercept = left_fit[0]*image_height**2 + left_fit[1]*image_height + left_fit[2]
         right_fit_x_intercept = right_fit[0]*image_height**2 + right_fit[1]*image_height + right_fit[2]
         center_dist = xm_per_pix * (car_position - (left_fit_x_intercept + right_fit_x_intercept) / 2)
@@ -545,7 +528,7 @@ def draw_lines(image, warped, left_fit, right_fit, left_curverad, right_curverad
 # In[21]:
 
 
-
+#Test full pipeline
 test_img = cv2.imread('test_images/test6.jpg')
 test_img = cv2.cvtColor(test_img, cv2.COLOR_RGB2BGR)
 
@@ -571,6 +554,7 @@ plt.show()
 # In[22]:
 
 
+#Line class for tracking, smoothing and sanity checking of fits while detecting proccess (used for video)
 class Line():        
     def sanity_check_lane(self):       
         return len(self.current_fit) > 0 and (self.diffs[0] > 0.001 or self.diffs[1] > 1 or self.diffs[2] > 100)    
@@ -583,6 +567,7 @@ class Line():
                 self.detected = False
             else:
                 self.current_fit.append(fit)
+                #for smoothing we are using moving average with size 8
                 if len(self.current_fit) > 8:
                     self.current_fit = self.current_fit[len(self.current_fit)-8:]
                 self.best_fit = np.average(self.current_fit, axis=0)
