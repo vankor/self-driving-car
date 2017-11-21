@@ -14,9 +14,9 @@ All the code of this project is in 'lane_lines_detector.ipynb' notebook.
 [image5]: ./images/lines_finding_step1.png "Preprocess"
 [image6]: ./images/lines_finding_ex2.png "Fitted lines"
 [image7]: ./images/lines_finding_ex2.png "Fitted lines"
-[image8]: ./images/challenge01.jpg_processed.jpg "Processed1"
-[image9]: ./images/test1.jpg_processed.jpg "Processed2"
-[image10]: ./images/test6.jpg_processed.jpg "Processed3"
+[image8]: ./images/challenge01_processed.jpg "Processed1"
+[image9]: ./images/test1_processed.jpg "Processed2"
+[image10]: ./images/test6_processed.jpg "Processed3"
 [video1]: ./project_video_output_final.mp4 "Video"
 
 ### Camera calibration
@@ -93,19 +93,24 @@ Function 'draw_lines()' is responsible for drawing lane area on the original ima
 
 ---
 
-### Pipeline (video)
+### Video result
 
-#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-Here's a [link to my video result](./project_video.mp4)
+Here's a [link to my video result](./project_video_output_final.mp4)
 
 ---
 
 ### Discussion
 
-#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+#### 1. Problems and possible improvements
 
 There were following problems faced during implementation:
 1. Sometimes there was not enough points to fit one of the lines correctly
-2. Noise and shadows on images
-3. Another vehicle on road 
+2. Noises and shadows on images
+3. Another vehicles on the road 
+
+Possible improvements:
+1. Add equidistant technique to approximate lines with too few pixels more accuratly
+2. Further experiments with colorspaces, gradients, threshholds and perspective transformations
+3. Filter outlier points
+4. Another vehicle recognition
