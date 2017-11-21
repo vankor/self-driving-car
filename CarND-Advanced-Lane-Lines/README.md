@@ -1,39 +1,106 @@
-## Advanced Lane Finding
-[![Udacity - Self-Driving Car NanoDegree](https://s3.amazonaws.com/udacity-sdc/github/shield-carnd.svg)](http://www.udacity.com/drive)
+## Advanced Lane Lines Finding
 
+**Advanced Lane Finding Project**
 
-In this project, your goal is to write a software pipeline to identify the lane boundaries in a video, but the main output or product we want you to create is a detailed writeup of the project.  Check out the [writeup template](https://github.com/udacity/CarND-Advanced-Lane-Lines/blob/master/writeup_template.md) for this project and use it as a starting point for creating your own writeup.  
+All the code of this project is in 'lane_lines_detector.ipynb' notebook.
 
-Creating a great writeup:
+[//]: # (Image References)
+
+[image1]: ./images/multiple_chess_calib.png "Multiple calib"
+[image20]: ./images/chess_corners.png "Road Transformed"
+[image2]: ./images/calibration_example.png "Road Transformed"
+[image3]: ./images/multiple_threshold_examples.png "Binary Example"
+[image4]: ./images/before_after_warp.png "Warp Example"
+[image5]: ./images/lines_finding_step1.png "Preprocess"
+[image6]: ./images/lines_finding_ex2.png "Fitted lines"
+[image7]: ./images/lines_finding_ex2.png "Fitted lines"
+[image8]: ./images/challenge01.jpg_processed.jpg "Processed1"
+[image9]: ./images/test1.jpg_processed.jpg "Processed2"
+[image10]: ./images/test6.jpg_processed.jpg "Processed3"
+[video1]: ./project_video_output_final.mp4 "Video"
+
+### Camera calibration
+
+The code for this step is contained in the third code cell of the IPython 'lane_lines_detector.ipynb'  notebook.
+Firstly object points were prepared. `objp` is just a replicated array of coordinates, and `objpoints` will be appended with a copy of it every time I successfully detect all chessboard corners in a test image. `imgpoints` will be appended with the (x, y) pixel position of each of the corners in the image plane with each successful chessboard detection. Below you can see corners detection results:  
+
+![alt text][image1]
+
+### Pipeline (single images)
+
+#### 1. Image distortion correction.
+
+`objpoints` and `imgpoints` are being used to compute the camera calibration matrix and distortion coefficients using the `cv2.calibrateCamera()` function. I applied this distortion correction to the test image using the `cv2.undistort()` function. For validating distortion correction process chess board image was being used. Below you can see how distortion correction looks like:
+![alt text][image20]![alt text][image2]
+
+#### 2. Color spaces transformation and using image thresholdes .
+
+Function 'combine_thresholds' is responsible for image colors transformation. There were grayscale threshold, HSL and LAB colorspaces being used. In HSL colorspace threshold is applied to L and S channels and in LAB colorspace threshold was being applied for B channel.
+
+I have tried to use color gradient (Sobel function) but it performs not so well as manipulation with colorspaces and thresholds, especially LAB and B channel. That has helped a lot to reduce noise on the road and shadows.
+Below you can see example of using colorspace transformations and channel thresholds for multiple images from all project videos:
+
+![alt text][image3]
+
+#### 3. Perspective transform 
+
+Function 'image_preprocessing_pipeline' does perspective transformation using transformation matrix returned from 'build_transformation_matricies' function. Source and destination points for warping image were hardcoded following way:
+
+```python
+src = np.array([[585. /1280.*img_size[1], 455./720.*img_size[0]],
+                        [705. /1280.*img_size[1], 455./720.*img_size[0]],
+                        [1130./1280.*img_size[1], 720./720.*img_size[0]],
+                        [190. /1280.*img_size[1], 720./720.*img_size[0]]],
+                        np.float32)
+
+dst = np.array([[300. /1280.*img_size[1], 100./720.*img_size[0]],
+                        [1000./1280.*img_size[1], 100./720.*img_size[0]],
+                        [1000./1280.*img_size[1], 720./720.*img_size[0]],
+                        [300. /1280.*img_size[1], 720./720.*img_size[0]]],
+                        np.float32)
+```
+Perspective transform is verified by drawing src points on image. Below you can see how perspective warping works:
+
+![alt text][image4]
+
+#### 4. Lane-line pixels identification and building polynomial fits for two lane lines
+
+From scratch if there are no pixels available on previous steps histogram sliding window technique was being applied to identify needed pixels for each line. See function 'build_lines_from_scratch' in 'lane_lines_detector.ipynb' notebook. 
+
+If there are already some left and right line pixels identified on previous steps they can be used to get new lane lines pixels. See function 'build_lines_from_prev_points' that build new lanes pixels based on where are previously defined lanes pixels using margin.
+
+![alt text][image5]
+![alt text][image6]
+
+#### 5. Calculation of lane curvature radius and identification of the vehicle position with respect to center
+Radius of lane curvature was calculated using given formula.
+
+#### 6. Another techniques
+- There was being used smoothing using moving average for lane fits. This helps to make lane detection more accurate.
+- Also, sanity check was applied to filter out fits with anomal coefficients. For this purposes was being used difference in fit coefficients between last and new fits.
+
+#### 7. Drawing lane area on the image 
+Function 'draw_lines()' is responsible for drawing lane area on the original image. Below you can see drawn lane areas on images from different videos:
+
+![alt text][image8]
+![alt text][image9]
+![alt text][image10]
+
 ---
-A great writeup should include the rubric points as well as your description of how you addressed each point.  You should include a detailed description of the code used in each step (with line-number references and code snippets where necessary), and links to other supporting documents or external references.  You should include images in your writeup to demonstrate how your code works with examples.  
 
-All that said, please be concise!  We're not looking for you to write a book here, just a brief description of how you passed each rubric point, and references to the relevant code :). 
+### Pipeline (video)
 
-You're not required to use markdown for your writeup.  If you use another method please just submit a pdf of your writeup.
+#### 1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (wobbly lines are ok but no catastrophic failures that would cause the car to drive off the road!).
 
-The Project
+Here's a [link to my video result](./project_video.mp4)
+
 ---
 
-The goals / steps of this project are the following:
+### Discussion
 
-* Compute the camera calibration matrix and distortion coefficients given a set of chessboard images.
-* Apply a distortion correction to raw images.
-* Use color transforms, gradients, etc., to create a thresholded binary image.
-* Apply a perspective transform to rectify binary image ("birds-eye view").
-* Detect lane pixels and fit to find the lane boundary.
-* Determine the curvature of the lane and vehicle position with respect to center.
-* Warp the detected lane boundaries back onto the original image.
-* Output visual display of the lane boundaries and numerical estimation of lane curvature and vehicle position.
+#### 1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
 
-The images for camera calibration are stored in the folder called `camera_cal`.  The images in `test_images` are for testing your pipeline on single frames.  If you want to extract more test images from the videos, you can simply use an image writing method like `cv2.imwrite()`, i.e., you can read the video in frame by frame as usual, and for frames you want to save for later you can write to an image file.  
-
-To help the reviewer examine your work, please save examples of the output from each stage of your pipeline in the folder called `ouput_images`, and include a description in your writeup for the project of what each image shows.    The video called `project_video.mp4` is the video your pipeline should work well on.  
-
-The `challenge_video.mp4` video is an extra (and optional) challenge for you if you want to test your pipeline under somewhat trickier conditions.  The `harder_challenge.mp4` video is another optional challenge and is brutal!
-
-If you're feeling ambitious (again, totally optional though), don't stop there!  We encourage you to go out and take video of your own, calibrate your camera and show us how you would implement this project from scratch!
-
-## How to write a README
-A well written README file can enhance your project and portfolio.  Develop your abilities to create professional README files by completing [this free course](https://www.udacity.com/course/writing-readmes--ud777).
-
+There were following problems faced during implementation:
+1. Sometimes there was not enough points to fit one of the lines correctly
+2. Noise and shadows on images
+3. Another vehicle on road 
