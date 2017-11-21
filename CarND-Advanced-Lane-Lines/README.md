@@ -33,7 +33,7 @@ Firstly object points were prepared. `objp` is just a replicated array of coordi
 `objpoints` and `imgpoints` are being used to compute the camera calibration matrix and distortion coefficients using the `cv2.calibrateCamera()` function. I applied this distortion correction to the test image using the `cv2.undistort()` function. For validating distortion correction process chess board image was being used. Below you can see how distortion correction looks like:
 ![alt text][image20]![alt text][image2]
 
-#### 2. Color spaces transformation and using image thresholdes .
+#### 2. Color spaces transformation and using image thresholds
 
 Function 'combine_thresholds' is responsible for image colors transformation. There were grayscale threshold, HSL and LAB colorspaces being used. In HSL colorspace threshold is applied to L and S channels and in LAB colorspace threshold was being applied for B channel.
 
@@ -73,10 +73,15 @@ If there are already some left and right line pixels identified on previous step
 ![alt text][image6]
 
 #### 5. Calculation of lane curvature radius and identification of the vehicle position with respect to center
-Radius of lane curvature was calculated using given formula.
+Radius of lane curvature was calculated using given formula. 
+```python
+    left_curverad = ((1 + (2*left_fit_cr[0]*y_eval*ym_per_pix + left_fit_cr[1])**2)**1.5) / np.absolute(2*left_fit_cr[0])
+    right_curverad = ((1 + (2*right_fit_cr[0]*y_eval*ym_per_pix + right_fit_cr[1])**2)**1.5) / np.absolute(2*right_fit_cr[0])
+```
+For full implementation see functions 'calculate_radius_and_distance_from_center' and 'calculate_distance_from_center'.
 
 #### 6. Another techniques
-- There was being used smoothing using moving average for lane fits. This helps to make lane detection more accurate.
+- There was being used smoothing using moving average for lane fits. This helps to make lane detection more robust and accurate.
 - Also, sanity check was applied to filter out fits with anomal coefficients. For this purposes was being used difference in fit coefficients between last and new fits.
 
 #### 7. Drawing lane area on the image 
