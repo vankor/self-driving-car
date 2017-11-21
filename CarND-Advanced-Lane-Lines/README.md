@@ -6,8 +6,8 @@ All the code of this project is in 'lane_lines_detector.ipynb' notebook.
 
 [//]: # (Image References)
 
-[image1]: ./images/multiple_chess_calib.png "Multiple calib"
-[image20]: ./images/chess_corners.png "Road Transformed"
+[image1]: ./images/chess_corners.png "Multiple calib"
+[image20]: ./images/chess_calib.png "Road Transformed"
 [image2]: ./images/calibration_example.png "Road Transformed"
 [image3]: ./images/multiple_threshold_examples.png "Binary Example"
 [image4]: ./images/before_after_warp.png "Warp Example"
