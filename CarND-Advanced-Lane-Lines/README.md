@@ -14,9 +14,9 @@ All the code of this project is in 'lane_lines_detector.ipynb' notebook.
 [image5]: ./images/lines_finding_step1.png "Preprocess"
 [image6]: ./images/lines_finding_ex2.png "Fitted lines"
 [image7]: ./images/lines_finding_ex2.png "Fitted lines"
-[image8]: ./images/challenge01_processed.jpg "Processed1"
-[image9]: ./images/test1_processed.jpg "Processed2"
-[image10]: ./images/test6_processed.jpg "Processed3"
+[image8]: ./processed_test_images/challenge01_processed.jpg "Processed1"
+[image9]: ./processed_test_images/test1_processed.jpg "Processed2"
+[image10]: ./processed_test_images/test6_processed.jpg "Processed3"
 [video1]: ./project_video_output_final.mp4 "Video"
 
 ### Camera calibration
