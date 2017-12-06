@@ -6,7 +6,7 @@ The goals / steps of this project are the following:
 * Optionally, you can also apply a color transform and append binned color features, as well as histograms of color, to your HOG feature vector. 
 * Note: for those first two steps don't forget to normalize your features and randomize a selection for training and testing.
 * Implement a sliding-window technique and use your trained classifier to search for vehicles in images.
-* Run your pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
+* Run pipeline on a video stream (start with the test_video.mp4 and later implement on full project_video.mp4) and create a heat map of recurring detections frame by frame to reject outliers and follow detected vehicles.
 * Estimate a bounding box for vehicles detected.
 
 [//]: # (Image References)
@@ -80,12 +80,14 @@ Accuracy of final trained model is about 98.5%. Sounds good
 Region of interest where vehicles is between 400 and 660 on y axis. Sliding windows was using only for this area. 
 Area closer to bottom of ROI was slided with 3.5 scaled windows, area closer to top of ROI was slided with scale 1.0. 
 Middle area of ROI was scanned with 1.5-2.0 scaled windows. Windows were configured in following way (ystart, ystop, scale):
+
 `window_sizes = [(400, 464, 1.0),
                  (420, 580, 1.5),
                  (400, 660, 1.5),
                  (400, 660, 2.0),
                  (500, 660, 3),
                  (464, 660, 3.5)]` 
+                 
 Window overlapping was being used 0.5 for x and 0.5 for y axis.
 Pls see sliding window implementation in section 4 in pipeline.py file and 'find_cars' function in functions.py file.
 Below is demonstrated how are windows looks like:
@@ -94,8 +96,8 @@ Below is demonstrated how are windows looks like:
 
 #### 2. Test processed images example 
 
-Ultimately I searched on scales defined above using YCrCb 3-channel HOG features. 
-Here are some example images:
+Ultimately frames were scanned with sliding windows using YCrCb 3-channel HOG features. 
+Results are showed below:
 
 ![alt text][image4]
 
