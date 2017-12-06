@@ -59,11 +59,13 @@ Below is an example using the `YCrCb` color space and HOG parameters of `orienta
 I tried various combinations of HOG parameters . 
 And the best chooses for me were:
 
-- YCrCb color space, 9 orient, 8 pixels per cell, 2 cells per block, using all color channels for gradient 
+- YCrCb color space, 9 orient, 8 pixels per cell, 2 cells per block, using all color channels for gradient. 
 - YUV color space, 11 orient, 16 pixels per cell, 2 cells per block, using all color channels for gradient
 - HLS color space, 9 orient, 8 pixels per cell, 2 cells per block, using all color channels for gradient
 
-YCrCb color space provides quite good performance provides, so it has been picked.
+For greater orient and pixels per block values there are to much false positive matches found on the image. For less values there is low detection rate.
+
+First option with YCrCb color space provides quite good performance, so it has been picked.
 
 #### 3. Using SVM classifier
 
@@ -71,7 +73,7 @@ I trained a linear SVM using extracted HOG features as training set. Spatial fea
 and color histogram features were being tried but they dont give significant impact to performance. 
 That's why only HOG features were being used for SVM model input.
 Pls see section 3 in pipeline.py file. 
-Accuracy of final trained model is about 98.5%. Sounds good
+Accuracy of final trained model is about 98.5%. Sounds good.
 
 ### Sliding Window Search
 
@@ -117,10 +119,11 @@ Here's a [link to my video result](./project_video_final_processed.mp4)
 Also you can see video with features extracted for YUV color space [link to my video result (yuv colorspace)](./project_video_processed_yuv.mp4)
 
 
-#### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+#### 2. Flase positive filtering and smoothing
 
-Positions of positive detections were marked with rectangles in each frame of the video. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions. `scipy.ndimage.measurements.label()` was being used to identify individual blobs in the heatmap. There is assumed that each blob corresponds to a vehicle. To obtain shape of rectangle bounding boxes were constructed for the area of each blob detected.  
+Positions of positive detections were marked with rectangles in each frame of the video. From the positive detections heatmap was created and then thresholded to identify vehicle positions. `scipy.ndimage.measurements.label()` was being used to identify individual blobs in the heatmap. There is assumed that each blob corresponds to a vehicle. To obtain shape of rectangle bounding boxes were constructed for the area of each blob detected.  
 
+Also for more robust moving of vehicle related rectangles there was implemented smoothing so that previously detected positions are taken into account while current detection.
 
 ### Here are corresponding heatmaps for frames demonstrated above:
 
