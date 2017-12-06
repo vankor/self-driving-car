@@ -113,16 +113,13 @@ Results are showed below:
 
 #### 1. Video results
 Here's a [link to my video result](./project_video_final_processed.mp4)
+
 Also you can see video with features extracted for YUV color space [link to my video result (yuv colorspace)](./project_video_processed_yuv.mp4)
 
 
 #### 2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
 
-Positions of positive detections were marked with rectangles in each frame of the video.  
-From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  
-`scipy.ndimage.measurements.label()` was being used to identify individual blobs in the heatmap.  
-There is assumed that each blob corresponds to a vehicle.  
-To obtain shape of rectangle bounding boxes were constructed for the area of each blob detected.  
+Positions of positive detections were marked with rectangles in each frame of the video. From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions. `scipy.ndimage.measurements.label()` was being used to identify individual blobs in the heatmap. There is assumed that each blob corresponds to a vehicle. To obtain shape of rectangle bounding boxes were constructed for the area of each blob detected.  
 
 
 ### Here are corresponding heatmaps for frames demonstrated above:
@@ -154,3 +151,4 @@ Possible improvements could be:
  - more restrictive ROI (maybe x axis also can be restricted)
  - more complex learning algorithm (maybe using of neural network can be useful)
  - further experiments with features extraction (introduce new features, combine features, combine colorspaces)
+ - image preprocessing, filter noises, shadows and blicks
