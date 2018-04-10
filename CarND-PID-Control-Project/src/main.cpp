@@ -54,31 +54,31 @@ int main()
 
           static double throttle = 1;
           static double diff_threshold = 0.12;
-          static int brake_steps = 0;
+          static int steps_to_brake = 0;
           static bool brake = false;
-          const double target_speed = 100;
+          const double speed_limit = 100;
 
           pid_steer_angle.UpdateError(cte);
           steer_value = -pid_steer_angle.TotalError();
-          
+          double cte_diff = fabs(pid_steer_angle.cte_-pid_steer_angle.cte_prev_);
 
-            if( (fabs(pid_steer_angle.cte_-pid_steer_angle.cte_prev_) > diff_threshold)  && brake_steps == 0) {
-              brake_steps = 5;
+            if((cte_diff > diff_threshold)  && steps_to_brake == 0) {
+              steps_to_brake = 5;
               brake = true;
             }
 
             steer_value =  0.3 * steer_value;
 
             if(!brake){
-              if (speed < target_speed){
+              if (speed < speed_limit){
                 throttle +=0.1;
                 if (throttle > 1) throttle = 1;
               }
              }
             else {
               throttle = -0.0;
-              brake_steps--;
-              if (brake_steps == 0 ) {
+              steps_to_brake--;
+              if (steps_to_brake == 0 ) {
                 brake = false;
                 throttle = 1;
               }
