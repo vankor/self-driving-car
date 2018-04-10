@@ -1,6 +1,6 @@
 # PID control for seld-driving car
 
-PID controllers is kind of cntroller being used in robotics. It collects error signal (cross track error) to know the difference between desired and measurd values and sets robot's behaviour to be closer to desired points. In current project I am using cross-track error (cte) - difference between actual car positions and reference trajectory. PID controller should fing steering angles of a car to minimize cte.
+PID is a kind of controllers being used in robotics. It collects error signal (cross track error) to know the difference between desired and measurd values and sets robot's behaviour to be closer to desired points. In current project I am using cross-track error (cte) - difference between actual car positions and reference trajectory. PID controller should fing steering angles of a car to minimize cte.
 
 ## PID components
 
