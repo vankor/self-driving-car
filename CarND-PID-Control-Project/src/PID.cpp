@@ -49,7 +49,6 @@ void PID::UpdateError(double cte) {
 
     if (step_number % (update_error_after_steps   + update_params_steps ) == 0 && use_twiddle){
         if (total_error < best_error) {
-            cout << "improvement!" << endl;
             best_error = total_error;
             if (step_number !=  update_error_after_steps   + update_params_steps ) {
                 dp[pid_element_index] *= 1.1;
