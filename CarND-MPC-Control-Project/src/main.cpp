@@ -65,6 +65,20 @@ Eigen::VectorXd polyfit(Eigen::VectorXd xvals, Eigen::VectorXd yvals,
   return result;
 }
 
+void transformWayPoints(vector<double>& ptsx,
+                        vector<double>& ptsy,
+                        vector<double>& x_ref_points,
+                        vector<double>& y_ref_points,
+                        double px,
+                        double py, double psi){
+            for (int i = 0; i < ptsx.size(); i++) {
+              double dx = ptsx[i] - px;
+              double dy = ptsy[i] - py;
+              x_ref_points.push_back(dx * cos(-psi) - dy * sin(-psi));
+              y_ref_points.push_back(dx * sin(-psi) + dy * cos(-psi));
+            }
+}
+
 int main() {
   uWS::Hub h;
 
@@ -104,12 +118,7 @@ int main() {
             vector<double> x_ref_points;
             vector<double> y_ref_points;
 
-            for (int i = 0; i < ptsx.size(); i++) {
-              double dx = ptsx[i] - px;
-              double dy = ptsy[i] - py;
-              x_ref_points.push_back(dx * cos(-psi) - dy * sin(-psi));
-              y_ref_points.push_back(dx * sin(-psi) + dy * cos(-psi));
-            }
+            transformWayPoints(ptsx, ptsy, x_ref_points, y_ref_points, px, py, psi);
 
             Eigen::Map<Eigen::VectorXd> x_ref_points_eig(&x_ref_points[0], 6);
             Eigen::Map<Eigen::VectorXd> y_ref_points_eig(&y_ref_points[0], 6);

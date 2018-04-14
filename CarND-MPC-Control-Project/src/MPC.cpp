@@ -6,7 +6,7 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 10;
+size_t N = 9;
 double dt = 0.1;
 
 // This value assumes the model presented in the classroom is used.
@@ -49,6 +49,15 @@ class FG_eval {
 
   typedef CPPAD_TESTVECTOR(AD<double>) ADvector;
 
+    void operator()(ADvector& fg, const ADvector& vars) {
+
+            // Init error function
+            initCostFunction(fg, vars);
+
+            // Init constraints
+            initConstraints(fg, vars);
+    }
+
     void initCostFunction(ADvector& fg, const ADvector& vars){
           fg[0] = 0;
 
@@ -61,7 +70,6 @@ class FG_eval {
           for (int i = 0; i < N - 1; i++) {
             fg[0] += delta_error_weight * CppAD::pow(vars[delta_start + i], 2);
             fg[0] += a_weight * CppAD::pow(vars[a_start + i], 2);
-            // try adding penalty for speed + steer
             fg[0] += steer_speed_error_weight * CppAD::pow(vars[delta_start + i] * vars[v_start+i], 2);
           }
 
@@ -100,7 +108,6 @@ class FG_eval {
           AD<double> psides0 = CppAD::atan(coeffs[1] + 2 * coeffs[2] * x0 + 3 * coeffs[3] * CppAD::pow(x0, 2));
 
 
-          //Latency problem solution - use previous actuations
           if (t > 1) {
             a = vars[a_start + t - 2];
             delta = vars[delta_start + t - 2];
@@ -114,17 +121,6 @@ class FG_eval {
           fg[1 + cte_start + t] = cte1 - ((f0 - y0) + (v0 * CppAD::sin(epsi0) * dt));
           fg[1 + epsi_start + t] = epsi1 - ((psi0 - psides0) - v0/Lf * delta * dt);
         }
-    }
-
-
-
-    void operator()(ADvector& fg, const ADvector& vars) {
-
-            // Init error function
-            initCostFunction(fg, vars);
-
-            // Init constraints
-            initConstraints(fg, vars);
     }
 
 };
