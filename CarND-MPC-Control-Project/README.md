@@ -24,7 +24,7 @@ Waypoint coordinates were transformed to vehicle coodinate system (origin positi
 Polyfit and polyeval functions were being used to find coefficients from given waypoints.
 
 ## Model Predictive Control with Latency
-Latency problem was solved using actuator values for more previous steps (current step - 2). 
+Latency problem was solved using actuator values from more previous steps (current step - 2). 
 
 ---
 
