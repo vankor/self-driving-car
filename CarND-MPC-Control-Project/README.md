@@ -21,10 +21,10 @@ Choosen values are N = 9 and dt = 0.1. Such values provide quite good performanc
 
 ## Polynomial Fitting and MPC Preprocessing
 Waypoint coordinates were transformed to vehicle coodinate system (origin position is a vehicle position at (0, 0)).
-Polyfit and polyeval functions were being used to find coefficients from given waypoints.
+Polyfit and polyeval functions were being used to find coefficients from given waypoints. See transformWayPoints function in main.cpp.
 
 ## Model Predictive Control with Latency
-Latency problem was solved using actuator values from more previous steps (current step - 2). 
+Latency problem was solved using actuator values from more previous steps (current step - 2). Also for hard turns there was penaltized high velocity. So velocity * steering_angle value penaltizes cost function to have safer car behaviour on turns (break on turns).
 
 ---
 
