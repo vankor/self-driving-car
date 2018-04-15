@@ -19,6 +19,12 @@ Model calculates current step parameters based on previous step parameters for g
 ## N and dt values
 Choosen values are N = 9 and dt = 0.1. Such values provide quite good performance and latency. Many combinations were being tried like: 15/0.05; 12/0.07; 20/0.02; 10/0.2; 9/0.15 etc.
 
+Dt value reflects how frequent optimizer will set a corrective trajectory. So, smaller Dt values can provide better accuracy because trajectory corrections will be performed more frequently.
+
+N value means how many steps to the future prediction model will see to find optimal actuators values. Larger N values need more computational time, so it is not always reasonable to have large N.
+
+In general larger time horizon N*dt can give better driving accurcy on high speed because there is more information required to make effective driving actions on hight speed.
+
 ## Polynomial Fitting and MPC Preprocessing
 Waypoint coordinates were transformed to vehicle coodinate system (origin position is a vehicle position at (0, 0)).
 Polyfit and polyeval functions were being used to find coefficients from given waypoints. See transformWayPoints function in main.cpp.
