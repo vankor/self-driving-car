@@ -107,6 +107,7 @@ int main() {
           double v = j[1]["speed"];          
           double steer_value = j[1]["steering_angle"];
           double throttle_value = j[1]["throttle"];
+          double latency = 0.1;
 
           /*
           * TODO: Calculate steering angle and throttle using MPC.
@@ -124,11 +125,25 @@ int main() {
             Eigen::Map<Eigen::VectorXd> y_ref_points_eig(&y_ref_points[0], 6);
 
             auto coeffitients = polyfit(x_ref_points_eig, y_ref_points_eig, 3);
-            double cte = polyeval(coeffitients, 0);
-            double epsi = -atan(coeffitients[1]);
+
+            // Initial state.
+            const double x0 = 0;
+            const double y0 = 0;
+            const double psi0 = 0;
+            const double cte0 = polyeval(coeffitients, 0);
+            const double epsi0 = -atan(coeffitients[1]);
+
+            // After latency delay.
+            double x_init = x0 + ( v * cos(psi0) * latency );
+            double y_init = y0 + ( v * sin(psi0) * latency );
+            double psi_init = psi0 - ( v * steer_value * latency / mpc.Lf );
+            double v_init = v + throttle_value * latency;
+            double cte_init = cte0 + ( v * sin(epsi0) * latency );
+            double epsi_init = epsi0 - ( v * atan(coeffitients[1]) * latency / mpc.Lf );
+
 
             Eigen::VectorXd state(6);
-            state << 0, 0, 0, v, cte, epsi;
+            state << x_init, y_init, psi_init, v_init, cte_init, epsi_init;
             auto actuator_values = mpc.Solve(state, coeffitients);
             steer_value = actuator_values[0];
             throttle_value = actuator_values[1];

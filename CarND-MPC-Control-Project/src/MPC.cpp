@@ -6,8 +6,11 @@
 using CppAD::AD;
 
 // TODO: Set the timestep length and duration
-size_t N = 9;
+size_t N = 10;
 double dt = 0.1;
+
+const double Lf = 2.67;
+
 
 // This value assumes the model presented in the classroom is used.
 //
@@ -19,7 +22,7 @@ double dt = 0.1;
 // presented in the classroom matched the previous radius.
 //
 // This is the length from front to CoG that has a similar radius.
-const double Lf = 2.67;
+
 
 const double cte_error_weight = 2500;
 const double epsi_error_weight = 2500;
@@ -43,6 +46,7 @@ size_t a_start = delta_start + N - 1;
 
 class FG_eval {
  public:
+
   // Fitted polynomial coefficients
   Eigen::VectorXd coeffs;
   FG_eval(Eigen::VectorXd coeffs) { this->coeffs = coeffs; }
