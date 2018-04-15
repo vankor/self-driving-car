@@ -30,7 +30,8 @@ Waypoint coordinates were transformed to vehicle coodinate system (origin positi
 Polyfit and polyeval functions were being used to find coefficients from given waypoints. See transformWayPoints function in main.cpp.
 
 ## Model Predictive Control with Latency
-Latency problem was solved using actuator values from more previous steps (current step - 2). Also for hard turns there was penaltized high velocity. So velocity * steering_angle value penaltizes cost function to have safer car behaviour on turns (break on turns).
+Latency problem was solved using actuator values from more previous steps (current step - 2). For init step there was made the latency simulation.
+Also for hard turns there was penaltized high velocity. So velocity * steering_angle value penaltizes cost function to have safer car behaviour on turns (break on turns).
 
 ---
 
