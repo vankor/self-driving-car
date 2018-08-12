@@ -19,7 +19,7 @@ FCN provides huge benefit: FCN architecture allows to save spacial information t
 and allows to locate the object on a part of image:
 
 
-![alt text](https://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/img/FCN_arch.png)
+![alt text](./img/FCN_arch.png)
 
 FCN consists of following steps:
 
@@ -33,7 +33,7 @@ Architecture is generally called Encoder-decoder pattern, where:
  - pretrained model is Encoder
  - deconvolution model is Decoder
 
-![alt text](https://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/img/Encoder-Decoder.png)
+![alt text](./img/Encoder-Decoder.png)
 
 ## Current model layers description
 
@@ -45,9 +45,9 @@ Architecture is generally called Encoder-decoder pattern, where:
   
  4. Add skip layer. For skipping connections Vgg 4 layer 1x1 convolution result is added elementwise to deconvoluted Vgg 7 output result (step 3 result)
  
- 5. Upsamle prev skip layer result and add skip layer with 1x1 convoluton for vgg layer 3 output
+ 5. Upsample prev skip layer result and add skip layer with 1x1 convoluton for vgg layer 3 output
  
- 6. Upsamle prev skip layer result and generate output pixels
+ 6. Upsample prev skip layer result and generate output pixels
  
  
 ## Training process desriotion
@@ -89,22 +89,22 @@ Output image 1:
 
 Output image 2:
 
-![alt text](htts://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/results_after_50_epochs/um_000034.png)
+![alt text](./results_after_50_epochs/um_000034.png)
 
 Output image 3:
 
-![alt text](htts://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/results_after_50_epochs/um_000039.png)
+![alt text](./results_after_50_epochs/um_000039.png)
 
 Output image 4:
 
-![alt text](htts://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/results_after_50_epochs/um_000047.png)
+![alt text](./results_after_50_epochs/um_000047.png)
 
 Output image 5:
 
-![alt text](htts://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/results_after_50_epochs/um_000051.png)
+![alt text](./results_after_50_epochs/um_000051.png)
 
 Output image 6:
 
-![alt text](htts://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/results_after_50_epochs/uu_000000.png)
+![alt text](./results_after_50_epochs/uu_000000.png)
 
 
