@@ -85,7 +85,7 @@ python main.py
 
 Output image 1:
 
-![alt text](https://github.com/vankor/self-driving-car/tree/master/CarND-Semantic_Segmentation/results_after_50_epochs/um_000028.png)
+![alt text](./results_after_50_epochs/um_000028.png)
 
 Output image 2:
 
