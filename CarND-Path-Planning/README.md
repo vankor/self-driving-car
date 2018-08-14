@@ -66,11 +66,11 @@ double min_distance_back = 10;
     
     - identify if given vehicle is too close to our car
     
-    - identify if it is possible to go left or right, move to center or car should break/accelerate
+    - identify if it is possible to go left or right
     
     - calculate gaps from left and from right in order to choose where to go if needed
 
-- Make decision about next actions based on previous step info
+- Make decision about next actions based on previous step info (go left, right or keep lane)
 
 - Control speed, acceleration and jerk using other vehicles positions and parameters
 
